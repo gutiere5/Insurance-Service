@@ -1,0 +1,12 @@
+server:
+  port: 8083 # or any free port
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/SENG400Insurance
+    username: root
+    password: a7P4sdgr
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
