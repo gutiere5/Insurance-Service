@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.noel.constants.AppConstants;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -26,7 +25,7 @@ public class Insurance {
     @Enumerated(EnumType.STRING)
     private InsuranceStatus status;
 
-    @NotBlank(message = AppConstants.VEHICLEID_MANDATORY)
+    //@NotBlank(message = AppConstants.VEHICLEID_MANDATORY)
     @Column(length = 50)
     private String vehicleId;
 
@@ -38,12 +37,10 @@ public class Insurance {
     @Column(length = 50)
     private String policyNumber;
 
-    @NotNull
     @JsonProperty("start_date")
     @Column(length = 50)
     private Date startDate;
 
-    @NotNull
     @JsonProperty("end_date")
     @Column(length = 50)
     private Date endDate;

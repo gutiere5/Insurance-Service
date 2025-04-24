@@ -20,12 +20,7 @@ public class InsuranceServiceImp implements InsuranceService {
   @Override
   public Insurance create(Insurance insurance, String vehicleId) {
     insurance.setId(UUID.randomUUID().toString());
-    insurance.setStatus(InsuranceStatus.ACTIVE);
     insurance.setVehicleId(vehicleId);
-    insurance.setProvider(null);
-    insurance.setPolicyNumber(null);
-    insurance.setStartDate(null);
-    insurance.setEndDate(null);
     return insuranceRepository.save(insurance);
   }
 
