@@ -25,7 +25,7 @@ public class Insurance {
     @Enumerated(EnumType.STRING)
     private InsuranceStatus status;
 
-    //@NotBlank(message = AppConstants.VEHICLEID_MANDATORY)
+    @NotBlank(message = AppConstants.VEHICLEID_MANDATORY)
     @Column(length = 50)
     private String vehicleId;
 
@@ -34,6 +34,7 @@ public class Insurance {
     private String provider;
 
     @NotBlank(message = AppConstants.POLICYNUMBER_MANDATORY)
+    @JsonProperty("policy_number")
     @Column(length = 50)
     private String policyNumber;
 

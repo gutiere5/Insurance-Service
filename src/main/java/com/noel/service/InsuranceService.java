@@ -5,13 +5,13 @@ import java.util.List;
 
 public interface InsuranceService {
 
-  Insurance create(Insurance insurance, String vehicleId);
+  Insurance create(Insurance insurance);
 
   List<Insurance> getAllInsurances();
 
-  Insurance findById(String insuranceID);
+  Insurance findInsuranceByID(String insuranceID);
 
-  Insurance findByVehicleID(String vehicleId);
+  Insurance findInsuranceByVehicleID(String vehicleId);
 
-  void removeInsurance(String insuranceID);
+  void deleteInsurance(String insuranceID);
 }

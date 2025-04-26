@@ -2,7 +2,6 @@ package com.noel.service;
 
 
 import com.noel.model.Insurance;
-import com.noel.model.InsuranceStatus;
 import com.noel.repository.InsuranceRepository;
 
 import lombok.AllArgsConstructor;
@@ -18,9 +17,8 @@ public class InsuranceServiceImp implements InsuranceService {
   private final InsuranceRepository insuranceRepository;
 
   @Override
-  public Insurance create(Insurance insurance, String vehicleId) {
+  public Insurance create(Insurance insurance) {
     insurance.setId(UUID.randomUUID().toString());
-    insurance.setVehicleId(vehicleId);
     return insuranceRepository.save(insurance);
   }
 
@@ -30,17 +28,19 @@ public class InsuranceServiceImp implements InsuranceService {
   }
 
   @Override
-  public Insurance findById(String insuranceID) {
+  public Insurance findInsuranceByID(String insuranceID) {
     return insuranceRepository.findById(insuranceID).orElseThrow();
   }
 
   @Override
-  public Insurance findByVehicleID(String vehicleId) {
-    return insuranceRepository.findById(vehicleId).orElseThrow();
+  public Insurance findInsuranceByVehicleID(String vehicleId) {
+    return insuranceRepository
+            .findByVehicleId(vehicleId)
+            .orElseThrow();
   }
 
   @Override
-  public void removeInsurance(String insuranceID) {
+  public void deleteInsurance(String insuranceID) {
       insuranceRepository.deleteById(insuranceID);
   }
 }

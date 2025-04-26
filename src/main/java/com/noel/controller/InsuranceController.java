@@ -2,22 +2,27 @@ package com.noel.controller;
 
 import com.noel.model.Insurance;
 import com.noel.service.InsuranceService;
+import com.noel.util.UserContext;
 import jakarta.validation.Valid;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/insurance")
+@RequestMapping("/insurances")
 @AllArgsConstructor
 public class InsuranceController {
-    // http://localhost:8081/vehicles
+    // http://localhost:8083/insurances
     private final InsuranceService insuranceService;
+    private final ObjectFactory<UserContext> context;
 
-    @PostMapping("/{vehicleId}")
-    public Insurance create(@Valid @RequestBody Insurance insurance, @PathVariable String vehicleId) {
-    return insuranceService.create(insurance, vehicleId);
+
+    @PostMapping()
+    public Insurance create(@Valid @RequestBody Insurance insurance) {
+        context.getObject().assertAdmin();
+        return insuranceService.create(insurance);
     }
 
     @GetMapping
@@ -25,20 +30,20 @@ public class InsuranceController {
         return insuranceService.getAllInsurances();
     }
 
-    @GetMapping("/{vehicleId}")
-    public Insurance findById(@PathVariable String insuranceID) {
-        return insuranceService.findById(insuranceID);
+    @GetMapping("/{insuranceID}")
+    public Insurance findByInsuranceId(@PathVariable String insuranceID) {
+        return insuranceService.findInsuranceByID(insuranceID);
     }
 
     // http://localhost:8081/vehicles/{vehicleId}/user/{userId}
-    @PostMapping("/{vehicleId}/user/{userId}")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void findByVehicleID(@PathVariable String vehicleId) {
-        insuranceService.findByVehicleID(vehicleId);
+    @GetMapping("/vehicle/{vehicleID}")
+    public Insurance findByVehicleID(@PathVariable String vehicleID) {
+        return insuranceService.findInsuranceByVehicleID(vehicleID);
     }
 
-    @DeleteMapping("/{vehicleId}/user/{userId}")
+    @DeleteMapping("/{insuranceID}")
     public void removeInsurance(@PathVariable String insuranceID) {
-        insuranceService.removeInsurance(insuranceID);
+        context.getObject().assertAdmin();
+        insuranceService.deleteInsurance(insuranceID);
     }
 }
