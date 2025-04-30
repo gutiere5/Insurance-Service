@@ -3,9 +3,12 @@ server:
 
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/SENG400
-    username: root
-    password: a7P4sdgr
+    url: ${db.url}
+    username: ${db.username}
+    password: ${db.password}
+    driver:
+      class: com.mysql.jdbc.Driver
+
   jpa:
     show-sql: true
     hibernate:
